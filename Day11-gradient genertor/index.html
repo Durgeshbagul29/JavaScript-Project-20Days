@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gradient Genertor</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+  <section id="main-container">
+    <div class="graBox">
+      <h2>Tap on buttons and make your favourite color.</h2>
+      <div class="btn-box">
+        <button id="button1" class="myBtn"></button>
+        <button id="button2" class="myBtn"></button>
+        <button id="button3" class="myBtn"></button>
+      </div>
+      <div class="siderDiv">
+        <div class="sides" id="buttonTop">
+          <i class="fa-solid fa-arrow-up-long"></i>
+        </div>
+        <div class="sides" id="buttonRight">
+          <i class="fa-solid fa-arrow-right"></i>
+        </div>
+        <div class="sides" id="buttonBottom">
+          <i class="fa-solid fa-arrow-down-long"></i>
+        </div>
+        <div class="sides" id="buttonLeft">
+          <i class="fa-solid fa-arrow-left"></i>
+        </div>
+      </div>
+      <p>Copy your color code :</p>
+      <div class="colorCode">
+        background-image: linear-gradient(to right, #f63ac3, #1dacfc)
+      </div>
+      <p id="copyText"></p>
+    </div>
+  </section>
+  <footer id="footerContainer">
+    <a class="footer-text" href=""></a>
+  </footer>
+
+  <script type="text/javascript">
+
+    let button1 = document.getElementById("button1");
+    let button2 = document.getElementById("button2");
+    let button3 = document.getElementById("button3");
+    let copyRight = document.querySelector(".footer-text");
+    copyRight.textContent = "Copyright @ Developed By Durgesh Bagul";
+
+    let colorCode = document.querySelector(".colorCode");
+    let copyText = document.getElementById("copyText");
+    let color1 = "orange";
+    let color2 = "white";
+    let color3 = "green";
+
+    button1.innerText = color1;
+    button2.innerText = color2;
+    button3.innerText = color3;
+    colorCode.innerHTML = `background-image: linear-gradient(to bottom, ${color1}, ${color2}, ${color3})`;
+    document.body.style.backgroundImage = `linear-gradient(to bottom, ${color1}, ${color2}, ${color3})`;
+
+    const copyTextFormat = () => {
+      copyText.innerText = "";
+    }
+
+    const getHexvalue = () => {
+      let pattern = "0123456789abcdef";
+      let color = "#";
+      for (let i = 0; i < 6; i++) {
+        color = color + pattern[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    const handleButton1 = () => {
+      copyTextFormat();
+      button1.innerText = color1 = getHexvalue();
+      document.body.style.backgroundImage = `linear-gradient(to right,${color1}, ${color2}, ${color3})`;
+      colorCode.innerHTML = `background-image: linear-gradient(to right, ${color1}, ${color2}, ${color3})`;
+    };
+
+    const handleButton2 = () => {
+      copyTextFormat();
+      button2.innerText = color2 = getHexvalue();
+      document.body.style.backgroundImage = `linear-gradient(to right, ${color1}, ${color2}, ${color3})`;
+      colorCode.innerHTML = `background-image: linear-gradient(to right, ${color1}, ${color2}, ${color3})`;
+    };
+
+    const handleButton3 = () => {
+      copyTextFormat();
+      button3.innerText = color3 = getHexvalue();
+      document.body.style.backgroundImage = `linear-gradient(to right,${color1}, ${color2}, ${color3})`;
+      colorCode.innerHTML = `background-image: linear-gradient(to right, ${color1}, ${color2}, ${color3})`;
+    };
+
+
+    // slider position code 
+    let buttonRight = document.getElementById("buttonRight");
+    buttonRight.addEventListener("click", buttonRight = () => {
+      copyTextFormat();
+      side = "right";
+      applyColor(side);
+    });
+
+    let buttonBottom = document.getElementById("buttonBottom");
+    buttonBottom.addEventListener("click", buttonBottom = () => {
+      copyTextFormat();
+      side = "bottom";
+      applyColor(side);
+    });
+
+    let buttonLeft = document.getElementById("buttonLeft");
+    buttonLeft.addEventListener("click", buttonLeft = () => {
+      copyTextFormat();
+      side = "left";
+      applyColor(side);
+    });
+
+    let buttonTop = document.getElementById("buttonTop");
+    buttonTop.addEventListener("click", buttonTop = () => {
+      copyTextFormat();
+      side = "top";
+      applyColor(side);
+    });
+
+
+    const applyColor = (side) => {
+      let newSide = side;
+      document.body.style.backgroundImage = `linear-gradient(to ${newSide} ,${color1}, ${color2}, ${color3})`;
+      colorCode.innerHTML = `background-image: linear-gradient(to ${newSide} , ${color1}, ${color2}, ${color3})`;
+
+    };
+
+    button1.addEventListener("click", handleButton1);
+    button2.addEventListener("click", handleButton2);
+    button3.addEventListener("click", handleButton3);
+
+    colorCode.addEventListener("click", () => {
+      navigator.clipboard.writeText(colorCode.innerText);
+      copyText.innerText = "Color code copy successfully";
+    });
+
+  </script>
+</body>
+
+</html>
